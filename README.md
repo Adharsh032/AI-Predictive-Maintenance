@@ -39,4 +39,3 @@ Phase 1 - Project setup
 
 # AI-Predictive-Maintenance
 AI-powered predictive maintenance using LightGBM, SHAP, and Llama 3
-a55aaeb37047fc2e81baf2fb3db8750bee5e14ab
