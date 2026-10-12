@@ -1,3 +1,4 @@
+
 # Development of an AI Agent for Intelligent Predictive Maintenance in Industry 5.0 Using LightGBM and Large Language Models
 
 ## Project Description
@@ -35,3 +36,7 @@ The system uses LightGBM to predict machine failure from machine sensor values. 
 ## Current Development Status
 
 Phase 1 - Project setup
+
+# AI-Predictive-Maintenance
+AI-powered predictive maintenance using LightGBM, SHAP, and Llama 3
+a55aaeb37047fc2e81baf2fb3db8750bee5e14ab
