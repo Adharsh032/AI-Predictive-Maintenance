@@ -1,0 +1,140 @@
+[
+    {
+        "condition": "High tool wear",
+        "possible_causes": [
+            "Extended tool usage",
+            "Tool degradation",
+            "Insufficient tool maintenance"
+        ],
+        "recommended_actions": [
+            "Inspect the tool condition",
+            "Check for excessive wear",
+            "Consider tool replacement according to maintenance procedures"
+        ],
+        "priority": "High"
+    },
+    {
+        "condition": "High torque",
+        "possible_causes": [
+            "Excessive mechanical load",
+            "Tool wear",
+            "Material resistance",
+            "Mechanical friction"
+        ],
+        "recommended_actions": [
+            "Inspect the tool and mechanical components",
+            "Check for excessive load",
+            "Inspect for abnormal friction or resistance"
+        ],
+        "priority": "High"
+    },
+    {
+        "condition": "Abnormal rotational speed",
+        "possible_causes": [
+            "Operating condition outside normal range",
+            "Mechanical resistance",
+            "Motor or drive-related issue"
+        ],
+        "recommended_actions": [
+            "Check rotational speed settings",
+            "Inspect motor and drive components",
+            "Verify operating conditions"
+        ],
+        "priority": "Medium"
+    },
+    {
+        "condition": "High process temperature",
+        "possible_causes": [
+            "Excessive process load",
+            "Insufficient cooling",
+            "Abnormal operating conditions"
+        ],
+        "recommended_actions": [
+            "Inspect cooling conditions",
+            "Check process operating parameters",
+            "Inspect the machine for abnormal heat generation"
+        ],
+        "priority": "High"
+    },
+    {
+        "condition": "High air temperature",
+        "possible_causes": [
+            "Elevated ambient temperature",
+            "Insufficient environmental cooling"
+        ],
+        "recommended_actions": [
+            "Check ambient operating conditions",
+            "Verify machine ventilation",
+            "Inspect cooling arrangements"
+        ],
+        "priority": "Medium"
+    },
+    {
+        "condition": "Temperature imbalance",
+        "possible_causes": [
+            "Abnormal thermal conditions",
+            "Cooling system issue",
+            "Process operating variation"
+        ],
+        "recommended_actions": [
+            "Compare air and process temperatures",
+            "Inspect cooling system",
+            "Check operating conditions"
+        ],
+        "priority": "Medium"
+    },
+    {
+        "condition": "Combined stress conditions",
+        "possible_causes": [
+            "High torque combined with tool wear",
+            "Elevated temperature and mechanical load",
+            "Multiple abnormal operating conditions"
+        ],
+        "recommended_actions": [
+            "Inspect the machine for multiple contributing conditions",
+            "Review recent operating parameters",
+            "Perform a qualified maintenance inspection"
+        ],
+        "priority": "Critical"
+    },
+    {
+        "condition": "Tool-related failure",
+        "possible_causes": [
+            "Excessive tool wear",
+            "Mechanical loading",
+            "Tool degradation"
+        ],
+        "recommended_actions": [
+            "Inspect the tool",
+            "Check tool wear",
+            "Replace or service the tool according to maintenance procedures"
+        ],
+        "priority": "High"
+    },
+    {
+        "condition": "Heat-related failure",
+        "possible_causes": [
+            "Elevated process temperature",
+            "Elevated air temperature",
+            "Insufficient cooling"
+        ],
+        "recommended_actions": [
+            "Inspect cooling conditions",
+            "Check temperature readings",
+            "Inspect the machine for abnormal heat generation"
+        ],
+        "priority": "High"
+    },
+    {
+        "condition": "General machine inspection",
+        "possible_causes": [
+            "Unknown or combined operating abnormalities"
+        ],
+        "recommended_actions": [
+            "Review machine sensor values",
+            "Inspect relevant mechanical components",
+            "Validate the condition with qualified maintenance personnel"
+        ],
+        "priority": "Medium"
+    }
+]

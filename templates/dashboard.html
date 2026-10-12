@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - AI Predictive Maintenance</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+</head>
+
+
+<body>
+
+<div class="container-fluid py-4">
+
+    <!-- Header -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h1>
+                AI Predictive Maintenance Dashboard
+            </h1>
+
+            <p class="text-muted mb-0">
+                Machine prediction and maintenance overview
+            </p>
+
+        </div>
+
+        <div>
+
+            <a
+                href="/predict/"
+                class="btn btn-primary"
+            >
+                New Prediction
+            </a>
+
+            <a
+                href="/history"
+                class="btn btn-secondary"
+            >
+                Prediction History
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Statistics Cards -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Total Predictions -->
+
+        <div class="col-md-4 col-lg">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h6 class="text-muted">
+                        Total Predictions
+                    </h6>
+
+                    <h2>
+                        {{ statistics.total_predictions }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Failures -->
+
+        <div class="col-md-4 col-lg">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h6 class="text-muted">
+                        Total Failures
+                    </h6>
+
+                    <h2 class="text-danger">
+                        {{ statistics.total_failures }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Healthy -->
+
+        <div class="col-md-4 col-lg">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h6 class="text-muted">
+                        Healthy Machines
+                    </h6>
+
+                    <h2 class="text-success">
+                        {{ statistics.healthy_machines }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Warning -->
+
+        <div class="col-md-4 col-lg">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h6 class="text-muted">
+                        Warning Machines
+                    </h6>
+
+                    <h2 class="text-warning">
+                        {{ statistics.warning_machines }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Critical -->
+
+        <div class="col-md-4 col-lg">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h6 class="text-muted">
+                        Critical Machines
+                    </h6>
+
+                    <h2 class="text-danger">
+                        {{ statistics.critical_machines }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Charts -->
+
+    <div class="row g-4 mb-4">
+
+
+        <!-- Prediction Distribution -->
+
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+                        Failure Prediction Distribution
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div id="predictionChart"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Health Distribution -->
+
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+                        Machine Health Distribution
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div id="healthChart"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Predictions -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h5 class="mb-0">
+                Recent Predictions
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Product Type</th>
+
+                            <th>Prediction</th>
+
+                            <th>Failure Probability</th>
+
+                            <th>Health</th>
+
+                            <th>Date & Time</th>
+
+                            <th>Details</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for item in statistics.recent_predictions %}
+
+                        <tr>
+
+                            <td>
+                                {{ item.id }}
+                            </td>
+
+                            <td>
+                                {{ item.product_type }}
+                            </td>
+
+                            <td>
+
+                                {% if item.prediction == 1 %}
+
+                                    <span class="badge bg-danger">
+                                        Machine Failure
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-success">
+                                        No Machine Failure
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(
+                                    item.failure_probability * 100
+                                ) }}%
+                            </td>
+
+                            <td>
+
+                                {% if item.health_status == "Critical" %}
+
+                                    <span class="badge bg-danger">
+                                        Critical
+                                    </span>
+
+                                {% elif item.health_status == "Warning" %}
+
+                                    <span class="badge bg-warning text-dark">
+                                        Warning
+                                    </span>
+
+                                {% elif item.health_status == "Healthy" %}
+
+                                    <span class="badge bg-success">
+                                        Healthy
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        Not Available
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                {{ item.created_at }}
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="/predict/history/{{ item.id }}"
+                                    class="btn btn-sm btn-outline-primary"
+                                >
+                                    View
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% else %}
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="text-center text-muted"
+                            >
+                                No predictions available.
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Prediction Distribution
+
+    const predictionLabels = [
+        "No Machine Failure",
+        "Machine Failure"
+    ];
+
+    const predictionValues = [
+        {{ statistics.prediction_distribution["No Machine Failure"] }},
+        {{ statistics.prediction_distribution["Machine Failure"] }}
+    ];
+
+
+    Plotly.newPlot(
+        "predictionChart",
+        [
+            {
+                labels: predictionLabels,
+                values: predictionValues,
+                type: "pie",
+                hole: 0.4
+            }
+        ],
+        {
+            height: 350,
+            margin: {
+                t: 20,
+                b: 20,
+                l: 20,
+                r: 20
+            }
+        },
+        {
+            responsive: true
+        }
+    );
+
+
+    // Health Distribution
+
+    const healthLabels = [
+        "Healthy",
+        "Warning",
+        "Critical"
+    ];
+
+    const healthValues = [
+        {{ statistics.health_distribution["Healthy"] }},
+        {{ statistics.health_distribution["Warning"] }},
+        {{ statistics.health_distribution["Critical"] }}
+    ];
+
+
+    Plotly.newPlot(
+        "healthChart",
+        [
+            {
+                labels: healthLabels,
+                values: healthValues,
+                type: "pie",
+                hole: 0.4
+            }
+        ],
+        {
+            height: 350,
+            margin: {
+                t: 20,
+                b: 20,
+                l: 20,
+                r: 20
+            }
+        },
+        {
+            responsive: true
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

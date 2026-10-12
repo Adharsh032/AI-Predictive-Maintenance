@@ -1,0 +1,14 @@
+# Python environment and cache
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Secrets
+.env
+
+# Local database
+database/maintenance.db
+
+# Generated maintenance reports
+reports/maintenance_report_*.pdf
